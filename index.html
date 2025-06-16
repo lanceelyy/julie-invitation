@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>You're Invited!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #E6B83D;
+      --background-color: #140606;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--background-color);
+      color: #fff;
+      scroll-behavior: smooth;
+      padding: 0 12px;
+    }
+    section {
+      position: relative;
+      padding: 60px 20px;
+      text-align: center;
+      overflow: hidden;
+    }
+    section::before,
+    section::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    section::before {
+      top: 0;
+      background: linear-gradient(to bottom, rgba(20, 6, 6, 1), rgba(20, 6, 6, 0));
+    }
+    section::after {
+      bottom: 0;
+      background: linear-gradient(to top, rgba(20, 6, 6, 1), rgba(20, 6, 6, 0));
+    }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+      padding: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    .hero h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: var(--primary-color);
+    }
+    .hero-image {
+      max-width: 90%;
+      height: auto;
+      animation: fadeZoom 1.2s ease-out forwards;
+    }
+    .section-title {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #2b2a2a;
+    }
+    .highlight {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: var(--primary-color);
+    }
+    .date, .venue-info {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    .invite-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      animation: fadeZoom 1.2s ease-out;
+    }
+    .host {
+      max-width: 20%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      animation: fadeZoom 1.2s ease-out;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 30px;
+      padding: 0 10px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .venue {
+      background: #f0efeb;
+      color: #140606;
+    }
+    .venue h1 {
+      font-size: 28px;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: white;
+      font-size: 14px;
+    }
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+      .highlight {
+        font-size: 28px;
+      }
+      .section-title {
+        font-size: 20px;
+      }
+      .venue h1 {
+        font-size: 22px;
+      }
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+    }
+    @keyframes fadeZoom {
+      0% {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .gallery3d {
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+.gallery3d img {
+  width: 200px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+.gallery3d img:hover {
+  transform: rotateY(15deg) scale(1.05);
+}
+
+.hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 0;
+    }
+@media (max-width: 768px) {
+  .hero video {
+    object-fit: contain;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="audio/audio.mp3" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div id="music-toggle" style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+    <button id="mute-btn"
+      style="padding: 10px 16px; background-color: var(--primary-color); color: #000; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;">
+      🔊 Mute
+    </button>
+  </div>
+
+  <section class="hero" data-aos="fade-down">
+    <video autoplay muted loop playsinline>
+      <source src="images/intro.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-content">
+  
+  <button onclick="scrollToInvitation()" style="margin-top: 650px; padding: 12px 24px; background-color: transparent; border: 2px solid #E2B74E; color: #E2B74E; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;">
+  OPEN INVITATION
+</button>
+
+</div>
+
+    
+  </section>
+
+  <section id="invitation" class="invite-image-section" data-aos="zoom-in-up" data-aos-duration="1200" data-aos-delay="200">
+    <img src="images/date.png" alt="Save the Date" class="invite-image" />
+  </section>
+
+  <section data-aos="fade-left">
+    <h2 class="section-title">Gallery</h2>
+    <div class="gallery">
+      <img src="images/1.jpg" alt="Gallery 1" data-aos="fade-right">
+      <img src="images/2.jpg" alt="Gallery 2" data-aos="fade-left" data-aos-delay="100">
+    </div>
+  </section>
+
+  <section data-aos="fade-right">
+    <img src="images/list.png" alt="Guest List" class="invite-image" />
+  </section>
+
+<section data-aos="fade-right">
+    <img src="images/host.png" alt="Guest List" class="host" />
+  </section>
+
+
+  <section data-aos="fade-left">
+    <img src="images/attire.png" alt="Attire" class="invite-image" />
+  </section>
+
+<section data-aos="fade-left">
+  <h2 class="section-title">Gallery</h2>
+  <div class="gallery3d">
+    <img src="images/11.jpg" alt="Gallery 1">
+    <img src="images/12.jpg" alt="Gallery 2">
+    <img src="images/13.jpg" alt="Gallery 3">
+  </div>
+</section>
+
+  <section class="venue" data-aos="flip-up">
+    <h2 class="section-title">The Venue</h2>
+    <h1>Hidden Bliss Resort</h1>
+    <p class="venue-info">
+      Wenceslao Ortega St. Purok 6 Barangca, Baliuag, Bulacan<br>
+      <a 
+        href="https://www.google.com/maps/place/Hidden+Bliss+Private+Resort+and+Events+Place/@14.9789559,120.8803573,13.29z/data=!4m6!3m5!1s0x3397018a04f1df75:0x5f90a27a43c9b277!8m2!3d14.988577!4d120.9021787!16s%2Fg%2F11vjm5xwhf?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D"
+        target="_blank"
+        style="display: inline-block; margin-top: 10px; color: #140606; background-color: #E6B83D; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: bold;"
+      >
+        📍 View on Google Maps
+      </a>
+    </p>
+  </section>
+
+  <footer data-aos="fade-up">
+    <p>With love, the family of Julie</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true
+    });
+  </script>
+  <script>
+    const music = document.getElementById('bg-music');
+    const muteBtn = document.getElementById('mute-btn');
+    music.play().catch(() => {
+      const enableAudio = () => {
+        music.play();
+        document.removeEventListener('click', enableAudio);
+        document.removeEventListener('touchstart', enableAudio);
+      };
+      document.addEventListener('click', enableAudio);
+      document.addEventListener('touchstart', enableAudio);
+    });
+    muteBtn.addEventListener('click', () => {
+      music.muted = !music.muted;
+      muteBtn.textContent = music.muted ? '🔇 Unmute' : '🔊 Mute';
+    });
+  </script>
+  <script>
+  function scrollToInvitation() {
+    const target = document.getElementById("invitation");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+</script>
+
+</body>
+</html>
